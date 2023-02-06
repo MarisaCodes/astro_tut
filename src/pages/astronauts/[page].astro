@@ -1,0 +1,23 @@
+---
+export const getStaticPaths = async ({ paginate }) => {
+  const pages = [
+    { astronaut: "abc" },
+    { astronaut: "def" },
+    { astronaut: "ghi" },
+    { astronaut: "jkl" },
+  ];
+  return paginate(pages, {
+    pageSize: 1,
+  });
+};
+
+const { page } = Astro.props;
+---
+
+<div>
+  {
+    page.data.map((obj) => {
+      return <h1>{obj.astronaut}</h1>;
+    })
+  }
+</div>

@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = async ({ paginate }) => {
+  const allTags = ["red", "blue", "green"];
+  const allPosts = await Astro.glob("../../posts/*.md");
+
+  return allTags.map((tag) => {
+    const filteredposts = allPosts.filter(
+      (post) => post.frontmatter.tag === tag
+    );
+    return paginate(filteredposts, {
+      params: { tag },
+      pageSize: 1,
+    });
+    // paginate(filtered_posts, {params : {...}})
+  });
+};
+
+const { page } = Astro.props;
+console.log(page);
+const params = Astro.params;
+---
+
+<div>
+  <div>hi</div>
+</div>
